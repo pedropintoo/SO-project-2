@@ -116,7 +116,7 @@ void createLog (char nFic[], FULL_STAT *p_fSt)
  *  The following layout is obeyed for the full state in a single line
  *    \li chef state
  *    \li waiter state 
- *    \li receptioninst state 
+ *    \li receptionist state 
  *    \li groups state 
  *    \li table assigned to each group
  *

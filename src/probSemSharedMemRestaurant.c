@@ -109,9 +109,9 @@ int main (int argc, char *argv[])
     }
 
     /* parse config file */
-    fscanf(fp,"%*[^\n]");
+    fscanf(fp,"%*[^\n]"); // ignore '#ngroups'
     fscanf(fp,"%d ",&sh->fSt.nGroups);
-    fscanf(fp,"%*[^\n]");
+    fscanf(fp,"%*[^\n]"); // ignore '#startTime timeToEat'
     for(g=0;g < sh->fSt.nGroups;g++) {
        fscanf(fp,"%d %d", &sh->fSt.startTime[g], &sh->fSt.eatTime[g]);
     }
