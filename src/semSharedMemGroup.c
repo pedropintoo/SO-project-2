@@ -7,12 +7,12 @@
  *  Implementation with SVIPC.
  *
  *  Definition of the operations carried out by the groups:
- *     \li goToRestaurant
- *     \li checkInAtReception
- *     \li orderFood
- *     \li waitFood
- *     \li eat
- *     \li checkOutAtReception
+ *     \li goToRestaurant       -> GOTOREST (1)
+ *     \li checkInAtReception   -> ATRECEPTION (2)
+ *     \li orderFood            -> FOOD_REQUEST (3)
+ *     \li waitFood             -> WAIT_FOR_FOOD (4)
+ *     \li eat                  -> EAT (5)
+ *     \li checkOutAtReception  -> CHECKOUT (6)
  *
  *  \author Nuno Lau - December 2023
  */

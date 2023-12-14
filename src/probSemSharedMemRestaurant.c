@@ -166,6 +166,7 @@ int main (int argc, char *argv[])
         sprintf(num[0],"%d",g);
         sprintf(nFicErr+8,"%02d",g); 
         if (pidGR[g] == 0)
+            //                        group          key
             if (execl (GROUP, GROUP, num[0], nFic, num[1], nFicErr, NULL) < 0) { 
                 perror ("error on the generation of the group process");
                 exit (EXIT_FAILURE);
