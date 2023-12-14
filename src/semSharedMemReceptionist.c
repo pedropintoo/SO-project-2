@@ -118,7 +118,7 @@ int main (int argc, char *argv[])
     /* simulation of the life cycle of the receptionist */
     int nReq=0;
     request req;
-    while( nReq < sh->fSt.nGroups*2 ) {
+    while( nReq < sh->fSt.nGroups*2 ) { // each group must speak with receptionist 2 times!
         req = waitForGroup();
         switch(req.reqType) {
             case TABLEREQ:

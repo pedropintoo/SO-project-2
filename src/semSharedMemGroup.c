@@ -64,7 +64,7 @@ int main (int argc, char *argv[])
     int n;
 
     /* validation of command line parameters */
-    if (argc != 5) { 
+    if (argc != 5) {  // GROUP, num[0], nFic, num[1], nFicErr
         freopen ("error_GR", "a", stderr);
         fprintf (stderr, "Number of parameters is incorrect!\n");
         return EXIT_FAILURE;
