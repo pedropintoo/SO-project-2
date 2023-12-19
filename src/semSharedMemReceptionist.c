@@ -7,9 +7,10 @@
  *  Implementation with SVIPC.
  *
  *  Definition of the operations carried out by the receptionist:
- *     \li waitForGroup
- *     \li provideTableOrWaitingRoom
- *     \li receivePayment
+ *     \li waitForGroup                 -> TOARRIVE (0)
+ *     \li provideTableOrWaitingRoom    -> WAIT (1)
+ *     \li receivePayment               -> ATTABLE (2)
+ *                                      -> DONE (3)
  *
  *  \author Nuno Lau - December 2023
  */
