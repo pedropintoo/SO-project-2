@@ -18,20 +18,21 @@
 #include "probConst.h"
 
 /**
- *  \brief Definition of requests to receptionist and waiter 
+ *  \brief Definition of requests to receptionist and waiter
  */
-typedef struct {
+typedef struct
+{
     /** \brief request id */
     int reqType;
     /** \brief group that issues the request (dummy if request source is chef) */
     int reqGroup;
 } request;
 
-
 /**
  *  \brief Definition of <em>state of the intervening entities</em> data type.
  */
-typedef struct {
+typedef struct
+{
     /** \brief receptionist state */
     unsigned int receptionistStat;
     /** \brief waiter state */
@@ -43,12 +44,11 @@ typedef struct {
 
 } STAT;
 
-
 /**
  *  \brief Definition of <em>full state of the problem</em> data type.
  */
 typedef struct
-{   /** \brief state of all intervening entities */
+{ /** \brief state of all intervening entities */
     STAT st;
 
     /** \brief number of groups */
@@ -69,15 +69,12 @@ typedef struct
     /** \brief group associated to food request from waiter to chef */
     int foodGroup;
 
-
     /** \brief used by groups to store request to receptionist */
     request receptionistRequest;
 
     /** \brief used by groups and chef to store request to waiter */
     request waiterRequest;
 
-
 } FULL_STAT;
-
 
 #endif /* PROBDATASTRUCT_H_ */
