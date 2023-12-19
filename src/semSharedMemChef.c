@@ -141,6 +141,7 @@ static void waitForOrder()
         perror("error on the up operation for semaphore access (PT)");
         exit(EXIT_FAILURE);
     }
+    printf("########\n");
 
     if (semUp(semgid, sh->orderReceived) == -1)
     { /* enter critical region */
@@ -227,12 +228,12 @@ static void processOrder()
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
-    printf("ASDAD\n");
-    if (semDown(semgid, sh->waiterRequestPossible) == -1)
+    if (semDown(semgid, sh->waitOrder) == -1)
     { /* enter critical region */
         perror("error on the up operation for semaphore access (PT)");
         exit(EXIT_FAILURE);
     }
-    printf("ASDAD\n");
+    ////////////////////////////////////////////
 }
