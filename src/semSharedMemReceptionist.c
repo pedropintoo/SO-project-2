@@ -158,7 +158,7 @@ int main(int argc, char *argv[])
 static int decideTableOrWait(int n)
 {
     // TODO insert your code here
-    
+
 
     return 1;
 }
@@ -286,10 +286,7 @@ static void provideTableOrWaitingRoom(int n)
 
     ////////////////////////////////////////////
     // TODO insert your code here
-
-    sh->fSt.st.receptionistStat = ASSIGNTABLE;
-    saveState(nFic, &sh->fSt);
-
+    
     switch(sh->fSt.assignedTable[n] = decideTableOrWait(n)) {
         case -1:
             groupRecord[n] = WAIT;
@@ -302,7 +299,9 @@ static void provideTableOrWaitingRoom(int n)
             }    
             groupRecord[n] = ATTABLE;
     }
-    
+
+    sh->fSt.st.receptionistStat = 0;
+    saveState(nFic, &sh->fSt);
     
 
     ////////////////////////////////////////////
