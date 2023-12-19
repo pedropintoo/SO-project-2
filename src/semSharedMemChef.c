@@ -102,7 +102,6 @@ int main(int argc, char *argv[])
     srandom((unsigned int)getpid());
 
     /* simulation of the life cycle of the chef */
-
     int nOrders = 0;
     while (nOrders < sh->fSt.nGroups)
     {
@@ -135,20 +134,17 @@ static void waitForOrder()
 {
     ////////////////////////////////////////////
     // TODO insert your code here
-
     if (semDown(semgid, sh->waitOrder) == -1)
     { /* enter critical region */
         perror("error on the up operation for semaphore access (PT)");
         exit(EXIT_FAILURE);
     }
-    printf("########\n");
 
     if (semUp(semgid, sh->orderReceived) == -1)
     { /* enter critical region */
         perror("error on the up operation for semaphore access (PT)");
         exit(EXIT_FAILURE);
     }
-
     ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
@@ -160,9 +156,10 @@ static void waitForOrder()
     ////////////////////////////////////////////
     // TODO insert your code here
 
-    sh->fSt.st.chefStat = COOK;
-
     lastGroup = sh->fSt.foodGroup;
+    sh->fSt.foodOrder = 0; // notify group
+
+    sh->fSt.st.chefStat = COOK;
     saveState(nFic, &sh->fSt);
 
     ////////////////////////////////////////////
@@ -175,7 +172,7 @@ static void waitForOrder()
 
     ////////////////////////////////////////////
     // TODO insert your code here
-    if (semUp(semgid, sh->orderReceived) == -1)
+    if (semDown(semgid, sh->waitOrder) == -1)
     { /* enter critical region */
         perror("error on the up operation for semaphore access (PT)");
         exit(EXIT_FAILURE);
@@ -195,18 +192,19 @@ static void processOrder()
 {
     usleep((unsigned int)floor((MAXCOOK * random()) / RAND_MAX + 100.0));
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+    if (semUp(semgid, sh->waitOrder) == -1)
+    { /* enter critical region */
+        perror("error on the up operation for semaphore access (PT)");
+        exit(EXIT_FAILURE);
+    }
     if (semDown(semgid, sh->waiterRequestPossible) == -1)
     { /* enter critical region */
         perror("error on the up operation for semaphore access (PT)");
         exit(EXIT_FAILURE);
     }
-
-    if (semUp(semgid, sh->waiterRequest) == -1)
-    { /* enter critical region */
-        perror("error on the up operation for semaphore access (PT)");
-        exit(EXIT_FAILURE);
-    }
+    ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
@@ -214,13 +212,16 @@ static void processOrder()
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
 
-    sh->fSt.waiterRequest.reqType = FOODREADY;
-    sh->fSt.waiterRequest.reqGroup = lastGroup;
-
+    sh->fSt.waiterRequest.reqGroup = 777; // dummy
+    sh->fSt.waiterRequest.reqType = lastGroup;
+    sh->fSt.foodOrder = 0;
+    
     sh->fSt.st.chefStat = WAIT_FOR_ORDER;
     saveState(nFic, &sh->fSt);
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
@@ -230,7 +231,7 @@ static void processOrder()
 
     ////////////////////////////////////////////
     // TODO insert your code here
-    if (semDown(semgid, sh->waitOrder) == -1)
+    if (semUp(semgid, sh->waiterRequest) == -1)
     { /* enter critical region */
         perror("error on the up operation for semaphore access (PT)");
         exit(EXIT_FAILURE);
