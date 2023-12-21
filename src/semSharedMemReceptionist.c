@@ -174,6 +174,7 @@ static int decideNextGroup()
 {
     // TODO insert your code here
 
+
     return -1;
 }
 
@@ -195,8 +196,10 @@ static request waitForGroup()
         perror("error on the up operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
@@ -204,7 +207,10 @@ static request waitForGroup()
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
@@ -212,7 +218,10 @@ static request waitForGroup()
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
@@ -220,7 +229,10 @@ static request waitForGroup()
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     return ret;
 }
@@ -242,7 +254,10 @@ static void provideTableOrWaitingRoom(int n)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
@@ -269,7 +284,10 @@ static void receivePayment(int n)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
@@ -277,5 +295,8 @@ static void receivePayment(int n)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 }
