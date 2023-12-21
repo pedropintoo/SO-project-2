@@ -159,8 +159,25 @@ static int decideTableOrWait(int n)
 {
     // TODO insert your code here
 
+    int tables[NUMTABLES]; // 0 -> not assigned. 1 -> assigned
+    for (int t = 0; t < NUMTABLES; t++) tables[t] = 0;
 
-    return 1;
+    int nAssigned = 0;
+    for (int n = 0; n < sh->fSt.nGroups; n++) {
+        if (groupRecord[n] == ATTABLE) {
+            tables[sh->fSt.assignedTable[n]] = 1; // table assigned
+            nAssigned++;
+        }
+    }
+    
+    if (nAssigned == NUMTABLES) return -1; // wait, all tables are assigned
+
+    for (int t = 0; t < NUMTABLES; t++) {
+        if(tables[t] == 0) {
+            return t;
+        }
+    }
+
 }
 
 /**
@@ -199,10 +216,8 @@ static request waitForGroup()
     
     ////////////////////////////////////////////
     // TODO insert your code here       
-
     sh->fSt.st.receptionistStat = 0;
     saveState(nFic, &sh->fSt);
-    
     ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
@@ -213,20 +228,11 @@ static request waitForGroup()
 
     ////////////////////////////////////////////
     // TODO insert your code here
-
     if (semDown(semgid, sh->receptionistReq) == -1)
     { /* exit critical region */
         perror("error on the down operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-    
-    // wait until request
-    if (semUp(semgid, sh->receptionistRequestPossible) == -1)
-    { /* exit critical region */
-        perror("error on the down operation for semaphore access (WT)");
-        exit(EXIT_FAILURE);
-    }
-
     ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
@@ -237,13 +243,8 @@ static request waitForGroup()
 
     ////////////////////////////////////////////
     // TODO insert your code here
-
-    sh->fSt.st.receptionistStat = 1;
-    saveState(nFic, &sh->fSt);
-
     ret.reqGroup = sh->fSt.receptionistRequest.reqGroup;
     ret.reqType = sh->fSt.receptionistRequest.reqType;
-
     ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
@@ -254,13 +255,11 @@ static request waitForGroup()
 
     ////////////////////////////////////////////
     // TODO insert your code here
-
-    if (semUp(semgid, sh->receptionistReq) == -1)
-    { /* enter critical region */
-        perror("error on the up operation for semaphore access (WT)");
+    if (semUp(semgid, sh->receptionistRequestPossible) == -1)
+    { /* exit critical region */
+        perror("error on the down operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-    
     ////////////////////////////////////////////
 
 
@@ -286,12 +285,17 @@ static void provideTableOrWaitingRoom(int n)
 
     ////////////////////////////////////////////
     // TODO insert your code here
-    
+
+    sh->fSt.st.receptionistStat = ASSIGNTABLE;
+    saveState(nFic, &sh->fSt);
+
     switch(sh->fSt.assignedTable[n] = decideTableOrWait(n)) {
         case -1:
+            sh->fSt.groupsWaiting++;
             groupRecord[n] = WAIT;
             break;
         default:
+            if (sh->fSt.groupsWaiting > 0) sh->fSt.groupsWaiting--;
             if (semUp(semgid, sh->waitForTable[n] ) == -1)
             { /* exit critical region */
                 perror("error on the down operation for semaphore access (WT)");
@@ -299,11 +303,9 @@ static void provideTableOrWaitingRoom(int n)
             }    
             groupRecord[n] = ATTABLE;
     }
-
+    
     sh->fSt.st.receptionistStat = 0;
     saveState(nFic, &sh->fSt);
-    
-
     ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
@@ -331,7 +333,10 @@ static void receivePayment(int n)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
@@ -339,5 +344,8 @@ static void receivePayment(int n)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 }
