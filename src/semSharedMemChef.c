@@ -147,8 +147,7 @@ static void waitForOrder()
         perror("error on the up operation for semaphore access (PT)");
         exit(EXIT_FAILURE);
     }
-
-    if (semUp(semgid, sh->orderReceived) == -1)
+    if (semDown(semgid, sh->orderReceived) == -1)
     { /* enter critical region */
         perror("error on the up operation for semaphore access (PT)");
         exit(EXIT_FAILURE);
@@ -180,7 +179,6 @@ static void waitForOrder()
 
     ////////////////////////////////////////////
     // TODO insert your code here
-
     ////////////////////////////////////////////
 }
 
