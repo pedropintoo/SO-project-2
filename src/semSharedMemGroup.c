@@ -266,17 +266,17 @@ static void orderFood(int id)
     ////////////////////////////////////////////
     // TODO insert your code here
 
-    // if (semUp(semgid, sh->waiterRequest) == -1)
-    // { /* enter critical region */
-    //     perror("error on the up operation for semaphore access (CT)");
-    //     exit(EXIT_FAILURE);
-    // }
+    if (semUp(semgid, sh->waiterRequest) == -1)
+    { /* enter critical region */
+        perror("error on the up operation for semaphore access (CT)");
+        exit(EXIT_FAILURE);
+    }
 
-    // if (semUp(semgid, sh->waiterRequestPossible) == -1)
-    // { /* enter critical region */
-    //     perror("error on the up operation for semaphore access (CT)");
-    //     exit(EXIT_FAILURE);
-    // }
+    if (semUp(semgid, sh->waiterRequestPossible) == -1)
+    { /* enter critical region */
+        perror("error on the up operation for semaphore access (CT)");
+        exit(EXIT_FAILURE);
+    }
 
     ////////////////////////////////////////////
 
@@ -289,11 +289,11 @@ static void orderFood(int id)
     ////////////////////////////////////////////
     // TODO insert your code here
 
-    // sh->fSt.waiterRequest.reqType = FOODREQ;
-    // sh->fSt.waiterRequest.reqGroup = id;
+    sh->fSt.waiterRequest.reqType = FOODREQ;
+    sh->fSt.waiterRequest.reqGroup = id;
 
-    // sh->fSt.st.groupStat[id] = FOOD_REQUEST;
-    // saveState(nFic, &sh->fSt);
+    sh->fSt.st.groupStat[id] = FOOD_REQUEST;
+    saveState(nFic, &sh->fSt);
 
     ////////////////////////////////////////////
 
@@ -306,11 +306,11 @@ static void orderFood(int id)
     ////////////////////////////////////////////
     // TODO insert your code here
 
-    // if (semDown(semgid, sh->requestReceived[sh->fSt.assignedTable[id]]) == -1)
-    // { /* enter critical region */
-    //     perror("error on the down operation for semaphore access (CT)");
-    //     exit(EXIT_FAILURE);
-    // }
+    if (semDown(semgid, sh->requestReceived[sh->fSt.assignedTable[id]]) == -1)
+    { /* enter critical region */
+        perror("error on the down operation for semaphore access (CT)");
+        exit(EXIT_FAILURE);
+    }
 
     ////////////////////////////////////////////
 }
