@@ -198,9 +198,22 @@ static void eat(int id)
  */
 static void checkInAtReception(int id)
 {
+    // all the groups strats in GOTOREST state
+
     ////////////////////////////////////////////
     // TODO insert your code here
 
+    if (semDown(semgid, sh->receptionistReq) == -1)
+    { /* enter critical region */
+        perror("error on the up operation for semaphore access (CT)");
+        exit(EXIT_FAILURE);
+    }
+
+    if (semUp(semgid, sh->receptionistRequestPossible) == -1)
+    { /* enter critical region */
+        perror("error on the up operation for semaphore access (CT)");
+        exit(EXIT_FAILURE);
+    }
     ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
@@ -211,6 +224,9 @@ static void checkInAtReception(int id)
 
     ////////////////////////////////////////////
     // TODO insert your code here
+
+    sh->fSt.st.groupStat[id] = ATRECEPTION;
+    saveState(nFic, &sh->fSt);
 
     ////////////////////////////////////////////
 
