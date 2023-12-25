@@ -63,9 +63,10 @@ int main(int argc, char *argv[])
     int n;
 
     /* validation of command line parameters */
-    if (argc != 5) {  // GROUP, num[0], nFic, num[1], nFicErr
-        freopen ("error_GR", "a", stderr);
-        fprintf (stderr, "Number of parameters is incorrect!\n");
+    if (argc != 5)
+    { // GROUP, num[0], nFic, num[1], nFicErr
+        freopen("error_GR", "a", stderr);
+        fprintf(stderr, "Number of parameters is incorrect!\n");
         return EXIT_FAILURE;
     }
     else
@@ -197,7 +198,10 @@ static void eat(int id)
  */
 static void checkInAtReception(int id)
 {
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
@@ -205,7 +209,10 @@ static void checkInAtReception(int id)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
@@ -213,7 +220,10 @@ static void checkInAtReception(int id)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 }
 
 /**
@@ -228,7 +238,10 @@ static void checkInAtReception(int id)
  */
 static void orderFood(int id)
 {
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
@@ -236,7 +249,10 @@ static void orderFood(int id)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
@@ -244,7 +260,10 @@ static void orderFood(int id)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 }
 
 /**
@@ -264,7 +283,10 @@ static void waitFood(int id)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* enter critical region */
@@ -272,7 +294,10 @@ static void waitFood(int id)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
@@ -280,7 +305,10 @@ static void waitFood(int id)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* enter critical region */
@@ -302,7 +330,10 @@ static void waitFood(int id)
  */
 static void checkOutAtReception(int id)
 {
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
@@ -310,7 +341,10 @@ static void checkOutAtReception(int id)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* enter critical region */
@@ -318,7 +352,10 @@ static void checkOutAtReception(int id)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
@@ -326,7 +363,10 @@ static void checkOutAtReception(int id)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* enter critical region */
