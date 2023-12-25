@@ -133,6 +133,8 @@ int main(int argc, char *argv[])
  */
 static void waitForOrder()
 {
+    // chef starts in Wait for Order state
+
     ////////////////////////////////////////////
     // TODO insert your code here
     if (semDown(semgid, sh->waitOrder) == -1) // wait for order
