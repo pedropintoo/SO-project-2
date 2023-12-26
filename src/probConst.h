@@ -21,9 +21,9 @@
 #define  MAXCOOK        100
 
 /** \brief controls start time standard deviation */
-#define  STARTDEV         4 
+#define  STARTDEV         4   // 4 
 /** \brief controls eat time standard deviation */
-#define  EATDEV           4 
+#define  EATDEV           4   // 4
 
 /** \brief id of table request (group->receptionist) */
 #define TABLEREQ   1
