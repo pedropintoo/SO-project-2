@@ -71,9 +71,11 @@
 
 /* Receptionist state constants */
 
-/** \brief receptionist waits for food request */
+/** \brief receptionist waits for request */
+#define WAIT_REQUEST        0  // (new!)
+/** \brief receptionist assign a table */
 #define  ASSIGNTABLE        1
-/** \brief receptionist reiceives payment */
+/** \brief receptionist receives payment */
 #define  RECVPAY            2
 
 
