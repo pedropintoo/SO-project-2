@@ -193,6 +193,8 @@ static int decideTableOrWait(int n)
 static int decideNextGroup()
 {
     // TODO insert your code here
+    if(sh->fSt.groupsWaiting == 0) return -1;
+
     int r;
     for (int n = 0; n < sh->fSt.nGroups; n++) {
         if (groupRecord[n] == WAIT) {
@@ -342,27 +344,20 @@ static void receivePayment(int n)
         exit(EXIT_FAILURE);
     }
     
-
     ////////////////////////////////////////////
     // TODO insert your code here
     sh->fSt.st.receptionistStat = RECVPAY;
     saveState(nFic, &sh->fSt);
 
-    if (semUp(semgid, sh->tableDone[sh->fSt.assignedTable[n]]) == -1)
-    { 
-        perror("error on the up operation for semaphore access (WT)");
-        exit(EXIT_FAILURE);
-    }
-
     groupRecord[n] = DONE;
-    int table = sh->fSt.assignedTable[n];
+
+    int vacant_table = sh->fSt.assignedTable[n];
     sh->fSt.assignedTable[n] = -1;
 
-    int next_group = -1;
-    if(sh->fSt.groupsWaiting > 0) {
-        next_group = decideNextGroup();
+    int next_group = decideNextGroup();
+    if(next_group != -1) {
         sh->fSt.groupsWaiting--;
-        sh->fSt.assignedTable[next_group] = table; // !!
+        sh->fSt.assignedTable[next_group] = vacant_table; // !!
     }
     
     ////////////////////////////////////////////
@@ -375,6 +370,12 @@ static void receivePayment(int n)
 
     ////////////////////////////////////////////
     // TODO insert your code here
+    if (semUp(semgid, sh->tableDone[vacant_table]) == -1)
+    { 
+        perror("error on the up operation for semaphore access (WT)");
+        exit(EXIT_FAILURE);
+    }
+
     if (next_group != -1) {
         if (semUp(semgid, sh->waitForTable[next_group] ) == -1)
         { /* exit critical region */

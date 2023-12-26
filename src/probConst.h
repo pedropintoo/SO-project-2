@@ -18,7 +18,7 @@
 /** \brief number of tables */
 #define NUMTABLES 4
 /** \brief controls time taken to cook */
-#define MAXCOOK             40000     // 100
+#define MAXCOOK             40000  // 100
 
 /** \brief controls start time standard deviation */
 #define STARTDEV            4       // 4
