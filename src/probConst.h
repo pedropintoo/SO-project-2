@@ -71,7 +71,6 @@
 
 /* Receptionist state constants */
 
-<<<<<<< HEAD
 /** \brief receptionist waits for request */
 #define WAIT_REQUEST        0  // (new!)
 /** \brief receptionist assign a table */
@@ -79,11 +78,5 @@
 /** \brief receptionist receives payment */
 #define  RECVPAY            2
 
-=======
-/** \brief waiter waits for food request */
-#define ASSIGNTABLE 1
-/** \brief waiter reiceives payment */
-#define RECVPAY 2
->>>>>>> GroupsBranch
 
 #endif /* PROBCONST_H_ */
