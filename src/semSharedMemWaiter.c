@@ -181,13 +181,6 @@ static request waitForClientOrChef()
     // TODO insert your code here
     req.reqGroup = sh->fSt.waiterRequest.reqGroup;
     req.reqType = sh->fSt.waiterRequest.reqType;
-    if (req.reqType == FOODREQ) {
-        if (semUp(semgid, sh->requestReceived[sh->fSt.assignedTable[req.reqGroup]]) == -1)
-        {
-            perror("error on the up operation for semaphore access (WT)");
-            exit(EXIT_FAILURE);
-        }
-    }
     ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
@@ -231,7 +224,9 @@ static void informChef(int n)
     saveState(nFic, &sh->fSt);
 
     sh->fSt.foodGroup = n;
-    sh->fSt.foodOrder = 1;
+    sh->fSt.foodOrder = 1;   
+
+    int table = sh->fSt.assignedTable[n];
     ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1) /* exit critical region */
@@ -242,6 +237,11 @@ static void informChef(int n)
     
     ////////////////////////////////////////////
     // TODO insert your code here
+    if (semUp(semgid, sh->requestReceived[table]) == -1)
+    {
+        perror("error on the up operation for semaphore access (WT)");
+        exit(EXIT_FAILURE);
+    }
     if (semUp(semgid, sh->waitOrder) == -1) // inform chef!
     {
         perror("error on the up operation for semaphore access (WT)");
