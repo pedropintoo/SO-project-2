@@ -175,6 +175,7 @@ static int decideNextGroup()
 {
     // TODO insert your code here
 
+
     return -1;
 }
 
@@ -203,6 +204,8 @@ static request waitForGroup()
     sh->fSt.st.receptionistStat = 0;
     saveState(nFic, &sh->fSt);
     
+    ////////////////////////////////////////////
+
     ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
@@ -306,6 +309,8 @@ static void provideTableOrWaitingRoom(int n)
 
     ////////////////////////////////////////////
 
+    ////////////////////////////////////////////
+
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
         perror("error on the down operation for semaphore access (WT)");
@@ -331,7 +336,10 @@ static void receivePayment(int n)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
@@ -339,5 +347,8 @@ static void receivePayment(int n)
         exit(EXIT_FAILURE);
     }
 
+    ////////////////////////////////////////////
     // TODO insert your code here
+
+    ////////////////////////////////////////////
 }
