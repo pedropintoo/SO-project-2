@@ -192,6 +192,7 @@ static int decideNextGroup()
 {
     // TODO insert your code here
 
+
     return -1;
 }
 
@@ -218,6 +219,8 @@ static request waitForGroup()
     // TODO insert your code here       
     sh->fSt.st.receptionistStat = 0;
     saveState(nFic, &sh->fSt);
+    ////////////////////////////////////////////
+
     ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
@@ -306,6 +309,8 @@ static void provideTableOrWaitingRoom(int n)
     
     sh->fSt.st.receptionistStat = 0;
     saveState(nFic, &sh->fSt);
+    ////////////////////////////////////////////
+
     ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
