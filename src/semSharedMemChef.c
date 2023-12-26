@@ -189,18 +189,6 @@ static void processOrder()
 
     ////////////////////////////////////////////
     // TODO insert your code here
-    if (semDown(semgid, sh->waiterRequestPossible) == -1)
-    { /* enter critical region */
-        perror("error on the up operation for semaphore access (PT)");
-        exit(EXIT_FAILURE);
-    }
-
-    if (semUp(semgid, sh->waiterRequest) == -1)
-    { /* enter critical region */
-        perror("error on the up operation for semaphore access (PT)");
-        exit(EXIT_FAILURE);
-    }
-    ////////////////////////////////////////////
 
     // maybe work with the flag here: sh->fSt.foodOrder 
 
