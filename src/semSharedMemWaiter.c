@@ -239,14 +239,15 @@ static void informChef(int n)
         perror("error on the up operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
+    
     ////////////////////////////////////////////
     // TODO insert your code here
-    if (semUp(semgid, sh->waitOrder) == -1)
+    if (semUp(semgid, sh->waitOrder) == -1) // inform chef!
     {
         perror("error on the up operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-    if (semDown(semgid, sh->orderReceived) == -1)
+    if (semDown(semgid, sh->orderReceived) == -1) // wait until chef receive the order
     {
         perror("error on the down operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
