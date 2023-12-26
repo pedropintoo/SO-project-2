@@ -381,7 +381,7 @@ static void receivePayment(int n)
             perror("error on the down operation for semaphore access (WT)");
             exit(EXIT_FAILURE);
         }   
-        groupRecord[n] = ATTABLE;
+        groupRecord[next_group] = ATTABLE;
     }
     ////////////////////////////////////////////
 
