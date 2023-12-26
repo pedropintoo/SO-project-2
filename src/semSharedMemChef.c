@@ -248,3 +248,4 @@ static void processOrder()
         exit(EXIT_FAILURE);
     }
     ////////////////////////////////////////////
+}
