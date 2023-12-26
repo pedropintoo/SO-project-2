@@ -16,9 +16,9 @@
 /** \brief maximum number of groups */
 #define MAXGROUPS 16
 /** \brief number of tables */
-#define NUMTABLES 4
+#define NUMTABLES 3
 /** \brief controls time taken to cook */
-#define MAXCOOK             40000  // 100
+#define MAXCOOK             50000  // 100
 
 /** \brief controls start time standard deviation */
 #define STARTDEV            4       // 4
