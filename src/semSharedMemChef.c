@@ -207,12 +207,6 @@ static void processOrder()
 
     ////////////////////////////////////////////
     // TODO insert your code here
-    sh->fSt.waiterRequest.reqType = FOODREADY;
-    sh->fSt.waiterRequest.reqGroup = lastGroup;
-
-    sh->fSt.st.chefStat = WAIT_FOR_ORDER;
-    saveState(nFic, &sh->fSt);
-    ////////////////////////////////////////////
 
     sh->fSt.waiterRequest.reqType = FOODREADY;
     sh->fSt.waiterRequest.reqGroup = lastGroup;
