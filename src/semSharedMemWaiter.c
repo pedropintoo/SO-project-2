@@ -149,33 +149,34 @@ static request waitForClientOrChef()
         perror("error on the up operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-
+    ////////////////////////////////////////////
     // TODO insert your code here
+    ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
         perror("error on the down operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-
+    ////////////////////////////////////////////
     // TODO insert your code here
-
+    ////////////////////////////////////////////
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
         perror("error on the up operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-
+    ////////////////////////////////////////////
     // TODO insert your code here
-
+    ////////////////////////////////////////////
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
         perror("error on the down operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-
+    ////////////////////////////////////////////
     // TODO insert your code here
-
+    ////////////////////////////////////////////
     return req;
 }
 
@@ -195,16 +196,17 @@ static void informChef(int n)
         perror("error on the up operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-
+    ////////////////////////////////////////////
     // TODO insert your code here
-
+    ////////////////////////////////////////////
     if (semUp(semgid, sh->mutex) == -1) /* exit critical region */
     {
         perror("error on the down operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-
+    ////////////////////////////////////////////
     // TODO insert your code here
+    ////////////////////////////////////////////
 }
 
 /**
@@ -223,9 +225,9 @@ static void takeFoodToTable(int n)
         perror("error on the up operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
-
+    ////////////////////////////////////////////
     // TODO insert your code here
-
+    ////////////////////////////////////////////
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
         perror("error on the down operation for semaphore access (WT)");
