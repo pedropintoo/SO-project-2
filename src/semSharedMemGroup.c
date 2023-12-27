@@ -280,6 +280,8 @@ static void orderFood(int id)
 
     sh->fSt.st.groupStat[id] = FOOD_REQUEST;
     saveState(nFic, &sh->fSt);
+
+    int table = sh->fSt.assignedTable[id];
     ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
@@ -295,7 +297,7 @@ static void orderFood(int id)
         perror("error on the up operation for semaphore access (GR)");
         exit(EXIT_FAILURE);
     }
-    if (semDown(semgid, sh->requestReceived[sh->fSt.assignedTable[id]]) == -1)
+    if (semDown(semgid, sh->requestReceived[table]) == -1)
     { 
         perror("error on the down operation for semaphore access (GR)");
         exit(EXIT_FAILURE);
@@ -324,6 +326,8 @@ static void waitFood(int id)
     // TODO insert your code here
     sh->fSt.st.groupStat[id] = WAIT_FOR_FOOD;
     saveState(nFic, &sh->fSt);
+
+    int table = sh->fSt.assignedTable[id];
     ////////////////////////////////////////////
 
     if (semUp(semgid, sh->mutex) == -1)
@@ -334,7 +338,7 @@ static void waitFood(int id)
 
     ////////////////////////////////////////////
     // TODO insert your code here
-    if (semDown(semgid, sh->foodArrived[sh->fSt.assignedTable[id]]) == -1)
+    if (semDown(semgid, sh->foodArrived[table]) == -1)
     {
         perror("error on the down operation for semaphore access (GR)");
         exit(EXIT_FAILURE);
