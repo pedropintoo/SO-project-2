@@ -146,7 +146,7 @@ static request waitForClientOrChef()
     request req;
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
-        perror("error on the up operation for semaphore access (WT)");
+        perror("error on the down operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
 
@@ -165,12 +165,11 @@ static request waitForClientOrChef()
     ////////////////////////////////////////////
     // TODO insert your code here
     if (semDown(semgid, sh->waiterRequest) == -1)
-    { /* enter critical region */
+    {
         perror("error on the down operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
     ////////////////////////////////////////////
-
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
         perror("error on the down operation for semaphore access (WT)");
@@ -192,7 +191,7 @@ static request waitForClientOrChef()
     ////////////////////////////////////////////
     // TODO insert your code here
     if (semUp(semgid, sh->waiterRequestPossible) == -1)
-    { /* exit critical region */
+    {
         perror("error on the up operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
@@ -205,7 +204,7 @@ static request waitForClientOrChef()
  *  \brief waiter takes food order to chef
  *
  *  Waiter updates state and then takes food request to chef.
- *  Waiter should inform group that request is received.          // ????
+ *  Waiter should inform group that request is received.
  *  Waiter should wait for chef receiving request.
  *  The internal state should be saved.
  *
@@ -229,8 +228,8 @@ static void informChef(int n)
     int table = sh->fSt.assignedTable[n];
     ////////////////////////////////////////////
 
-    if (semUp(semgid, sh->mutex) == -1) /* exit critical region */
-    {
+    if (semUp(semgid, sh->mutex) == -1) 
+    { /* exit critical region */
         perror("error on the up operation for semaphore access (WT)");
         exit(EXIT_FAILURE);
     }
@@ -277,7 +276,7 @@ static void takeFoodToTable(int n)
     sh->fSt.st.waiterStat = TAKE_TO_TABLE;
     saveState(nFic, &sh->fSt);
 
-    if (semUp(semgid, sh->foodArrived[sh->fSt.assignedTable[sh->fSt.waiterRequest.reqGroup]]) == -1)
+    if (semUp(semgid, sh->foodArrived[sh->fSt.assignedTable[n]]) == -1)
     { /* exit critical region */
         perror("error on the up operation for semaphore access (WT)");
         exit(EXIT_FAILURE);

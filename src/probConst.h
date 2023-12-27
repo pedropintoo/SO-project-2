@@ -18,12 +18,12 @@
 /** \brief number of tables */
 #define NUMTABLES 2
 /** \brief controls time taken to cook */
-#define MAXCOOK             100  // 100
+#define MAXCOOK             10000  // 100
 
 /** \brief controls start time standard deviation */
-#define STARTDEV            4       // 4
+#define STARTDEV            40000      // 4
 /** \brief controls eat time standard deviation */
-#define EATDEV              4       // 4
+#define EATDEV              40000       // 4
 
 /** \brief id of table request (group->receptionist) */
 #define TABLEREQ 1

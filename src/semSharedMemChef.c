@@ -139,14 +139,14 @@ static void waitForOrder()
     // TODO insert your code here
     if (semDown(semgid, sh->waitOrder) == -1) // wait for order
     {                                         
-        perror("error on the up operation for semaphore access (PT)");
+        perror("error on the down operation for semaphore access (CH)");
         exit(EXIT_FAILURE);
     }
     ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
-        perror("error on the up operation for semaphore access (PT)");
+        perror("error on the down operation for semaphore access (CH)");
         exit(EXIT_FAILURE);
     }
 
@@ -158,18 +158,16 @@ static void waitForOrder()
     lastGroup = sh->fSt.foodGroup;
     sh->fSt.foodOrder = 0; 
     ////////////////////////////////////////////
-
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
-        perror("error on the up operation for semaphore access (PT)");
+        perror("error on the up operation for semaphore access (CH)");
         exit(EXIT_FAILURE);
     }
-
     ////////////////////////////////////////////
     // TODO insert your code here
     if (semUp(semgid, sh->orderReceived) == -1)
-    { /* enter critical region */
-        perror("error on the up operation for semaphore access (PT)");
+    { 
+        perror("error on the up operation for semaphore access (CH)");
         exit(EXIT_FAILURE);
     }
     ////////////////////////////////////////////
@@ -190,18 +188,16 @@ static void processOrder()
     ////////////////////////////////////////////
     // TODO insert your code here
 
-    // maybe work with the flag here: sh->fSt.foodOrder 
-
     if (semDown(semgid, sh->waiterRequestPossible) == -1)
-    { /* enter critical region */
-        perror("error on the up operation for semaphore access (PT)");
+    { 
+        perror("error on the down operation for semaphore access (CH)");
         exit(EXIT_FAILURE);
     }
     ////////////////////////////////////////////
 
     if (semDown(semgid, sh->mutex) == -1)
     { /* enter critical region */
-        perror("error on the up operation for semaphore access (PT)");
+        perror("error on the down operation for semaphore access (CH)");
         exit(EXIT_FAILURE);
     }
 
@@ -218,15 +214,15 @@ static void processOrder()
 
     if (semUp(semgid, sh->mutex) == -1)
     { /* exit critical region */
-        perror("error on the up operation for semaphore access (PT)");
+        perror("error on the up operation for semaphore access (CH)");
         exit(EXIT_FAILURE);
     }
 
     ////////////////////////////////////////////
     // TODO insert your code here
     if (semUp(semgid, sh->waiterRequest) == -1)
-    { /* enter critical region */
-        perror("error on the up operation for semaphore access (PT)");
+    { 
+        perror("error on the up operation for semaphore access (CH)");
         exit(EXIT_FAILURE);
     }
     ////////////////////////////////////////////
