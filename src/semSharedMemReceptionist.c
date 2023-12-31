@@ -335,13 +335,13 @@ static void receivePayment(int n)
 
     int next_group = decideNextGroup();
     if(next_group != -1) {
-        sh->fSt.groupsWaiting--;
         sh->fSt.assignedTable[next_group] = vacant_table; // !!
         if (semUp(semgid, sh->waitForTable[next_group] ) == -1)
         { 
             perror("error on the up operation for semaphore access (RT)");
             exit(EXIT_FAILURE);
-        }   
+        } 
+        sh->fSt.groupsWaiting--;  
         groupRecord[next_group] = ATTABLE;
     }
     
