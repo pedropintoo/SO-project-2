@@ -179,7 +179,7 @@ static int decideNextGroup()
     // TODO insert your code here
     if(sh->fSt.groupsWaiting == 0) return -1;
 
-    int r;
+    int r = -1;
     for (int n = 0; n < sh->fSt.nGroups; n++) {
         if (groupRecord[n] == WAIT) {
             r = n; // next group = smallest id that is waiting
