@@ -158,28 +158,12 @@ int main(int argc, char *argv[])
 static int decideTableOrWait(int n)
 {
     // TODO insert your code here
-
-    int tables[NUMTABLES]; // 0 -> not assigned. 1 -> assigned
-    for (int t = 0; t < NUMTABLES; t++) tables[t] = 0;
-
-    int nAssigned = 0;
-    for (int n = 0; n < sh->fSt.nGroups; n++) {
-        if (groupRecord[n] == ATTABLE) {
-            tables[sh->fSt.assignedTable[n]] = 1; // table assigned
-            nAssigned++;
-        }
+    int g;
+    for (int table = 0; table < NUMTABLES; table++) {
+        for (g = 0; g < sh->fSt.nGroups && sh->fSt.assignedTable[g] != table; g++);
+        if (g == sh->fSt.nGroups) return table;
     }
-    
-    if (nAssigned == NUMTABLES) return -1; // wait, all tables are assigned
-    
-    int r;
-    for (int t = 0; t < NUMTABLES; t++) {
-        if(tables[t] == 0) {
-            r = t;
-            break;
-        }
-    }
-    return r;
+    return -1;
 }
 
 /**
