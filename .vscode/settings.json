@@ -1,8 +1,0 @@
-{
-  "files.associations": {
-    "stdio.h": "c",
-    "semaphore.h": "c",
-    "sharedmemory.h": "c",
-    "sem.h": "c"
-  }
-}
